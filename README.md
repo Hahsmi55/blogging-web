@@ -292,7 +292,7 @@ admin/
 
 ## Infrastructure / Services
 
-* **Redis** — used by the Users Service
+* **Redis** — used by the Posts Service
 * **AWS S3** — used by the Posts Service for object storage
 * **Nodemailer** — email functionality
 * **Axios** — service-to-service HTTP communication
