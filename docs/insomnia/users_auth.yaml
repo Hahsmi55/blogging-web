@@ -1,0 +1,267 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: blog-auth
+meta:
+  id: wrk_d3330e4e3dab44a98ce60a4eef7dc88c
+  created: 1791202757197
+  modified: 1791316273493
+  description: ""
+collection:
+  - url: localhost:3000/auth/register
+    name: New Request
+    meta:
+      id: req_a18d5b58151e4e66a7fe983e108ea913
+      created: 1791202769615
+      modified: 1791204057318
+      isPrivate: false
+      description: ""
+      sortKey: -1791202769615
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"fname" : "ali",
+        	"lname" : "azhar",
+        	"email" : "test@test.com",
+        	"password" : "123456"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.1.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: localhost:3000/auth/login
+    name: New Request
+    meta:
+      id: req_881e1aa39d324b47bb59b55c1129f793
+      created: 1791203267278
+      modified: 1791316260372
+      isPrivate: false
+      description: ""
+      sortKey: -1791203267278
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email" : "admin@gmail.com",
+        	"password" : "admin_password"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.1.0
+        description: ""
+        disabled: false
+      - name: Authorization
+        value: Bearer token
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: localhost:3000/auth/logout
+    name: New Request
+    meta:
+      id: req_dc8a8549a9a242af8eec4bbea5e1f34d
+      created: 1791203444659
+      modified: 1791203706135
+      isPrivate: false
+      description: ""
+      sortKey: -1791203444659
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.1.0
+        description: ""
+        disabled: false
+      - name: Authorization
+        value: Bearer token
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: localhost:3000/auth/profile
+    name: New Request
+    meta:
+      id: req_c01a563627054aa2a9afc418a1a5865e
+      created: 1791203795270
+      modified: 1791204124116
+      isPrivate: false
+      description: ""
+      sortKey: -1791203795270
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.1.0
+        description: ""
+        disabled: false
+      - name: Authorization
+        value: Bearer token
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: localhost:3000/auth/all
+    name: New Request
+    meta:
+      id: req_f0985f85b2434df4979421733e49114e
+      created: 1791204230858
+      modified: 1791204374437
+      isPrivate: false
+      description: ""
+      sortKey: -1791204230858
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.1.0
+        description: ""
+        disabled: false
+      - name: Authorization
+        value: Bearer token
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: localhost:3000/auth/refresh-token
+    name: New Request
+    meta:
+      id: req_d9fe89f978bf4dea8e8a86d51d7a30ff
+      created: 1791315393049
+      modified: 1791315422144
+      isPrivate: false
+      description: ""
+      sortKey: -1791315393049
+    method: POST
+    headers:
+      - name: User-Agent
+        value: insomnia/12.1.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: localhost:3000/auth/update-password
+    name: New Request
+    meta:
+      id: req_63b1966911854c4b8605d5ce33366a7a
+      created: 1791315553716
+      modified: 1791315829112
+      isPrivate: false
+      description: ""
+      sortKey: -1791315553716
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"oldPassword" : "123456",
+        	"newPassword" : "12345"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.1.0
+        description: ""
+        disabled: false
+      - name: Authorization
+        value: Bearer token
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: localhost:3000/auth/delete/2
+    name: New Request
+    meta:
+      id: req_d22dc9ce18724c158cb09031a9632d1b
+      created: 1791315909842
+      modified: 1791316251019
+      isPrivate: false
+      description: ""
+      sortKey: -1791315909842
+    method: DELETE
+    headers:
+      - name: User-Agent
+        value: insomnia/12.1.0
+        description: ""
+        disabled: false
+      - name: Authorization
+        value: Bearer token
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_63cd2d62dab8618c5f77ee0651f8ec5886866a83
+    created: 1791202757207
+    modified: 1791316073196
+  cookies:
+    - id: bc9b14da-3926-4339-b84a-f78db4fd1ce2
+      key: refreshToken token
+      domain: localhost
+      path: /
+      secure: true
+      httpOnly: true
+      hostOnly: true
+environments:
+  name: Base Environment
+  meta:
+    id: env_63cd2d62dab8618c5f77ee0651f8ec5886866a83
+    created: 1791202757202
+    modified: 1791202757202
+    isPrivate: false

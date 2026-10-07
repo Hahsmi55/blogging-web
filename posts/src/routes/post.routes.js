@@ -2,15 +2,15 @@ const express = require('express');
 const router = express.Router();
 const postControllers = require('../controllers/post.controller');
 const authorMiddleware = require('../middlewares/authors.middlewares');
-const upload = require('../middlewares/multer.middleware');
 
 router.use(authorMiddleware);
 
 // author routes
-router.post('/create', upload.single('image'), postControllers.createPost);
+router.post('/create', postControllers.createPost);
 router.delete('/:id', postControllers.deletePost);
-router.put('/:id', upload.single('image'), postControllers.updatePost);
+router.put('/:id', postControllers.updatePost);
 router.get('/author', postControllers.getAllPostsAuthor);
+router.get("/presigned-url", postControllers.getPreSignedUrl);
 
 //admin routes  
 router.get('/all', postControllers.getAllPostsAdmin);

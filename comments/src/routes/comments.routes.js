@@ -9,6 +9,9 @@ router.post('/create', commentsController.createComment);
 router.delete('/:id', commentsController.deleteComment);
 router.put('/:id', commentsController.updateComment);
 
+//helping route to get all comments of an particular post
+router.get('/post/:id', commentsController.getCommentsByPostId);
+
 //admin routes
 router.get('/all', adminMiddleware, commentsController.getAllComments);
 router.delete('/delete/:id', adminMiddleware, commentsController.deleteCommentByAdmin);

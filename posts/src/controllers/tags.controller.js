@@ -3,7 +3,7 @@ const asyncHandler = require('../utils/asyncHandler.utils');
 const errorResponse = require('../utils/errorApi.utils');
 
 exports.getAllTags = asyncHandler(async (req, res, next) => {   
-    const tags = await prisma.tag.findMany();
+    const tags = await prisma.tags.findMany();
     res.status(200).json({ success: true, data: tags });
 });
 
@@ -14,24 +14,24 @@ exports.createTag = asyncHandler(async (req, res, next) => {
         return next(new errorResponse('Tag name is required', 400));
     }
 
-    const existingTag = await prisma.tag.findUnique({ where: { name } });    
+    const existingTag = await prisma.tags.findFirst({ where: { name } });    
 
     if (existingTag) {
         return next(new errorResponse('Tag already exists', 400));  
     }
-    const tag = await prisma.tag.create({ data: { name } });    
+    const tag = await prisma.tags.create({ data: { name } });    
     res.status(201).json({ success: true, data: tag });
 });
 
 exports.deleteTag = asyncHandler(async (req, res, next) => {
     const { id } = req.params;
 
-    const tag = await prisma.tag.findUnique({ where: { id: parseInt(id) } });   
+    const tag = await prisma.tags.findUnique({ where: { id: parseInt(id) } });   
     if (!tag) {
         return next(new errorResponse('Tag not found', 404));
     }
 
-    await prisma.tag.delete({ where: { id: parseInt(id) } });    
+    await prisma.tags.delete({ where: { id: parseInt(id) } });    
     res.status(200).json({ success: true, data: {} });
 });
 
@@ -43,12 +43,12 @@ exports.updateTag = asyncHandler(async (req, res, next) => {
         return next(new errorResponse('Tag name is required', 400));
     }
 
-    const tag = await prisma.tag.findUnique({ where: { id: parseInt(id) } });   
+    const tag = await prisma.tags.findUnique({ where: { id: parseInt(id) } });   
     if (!tag) {
         return next(new errorResponse('Tag not found', 404));
     }
 
-    const updatedTag = await prisma.tag.update({
+    const updatedTag = await prisma.tags.update({
         where: { id: parseInt(id) },
         data: { name },
         updatedAt: new Date()   

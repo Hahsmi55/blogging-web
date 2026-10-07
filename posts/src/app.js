@@ -3,7 +3,7 @@ const express = require('express');
 const postRoutes = require('./routes/post.routes');
 const tagsRoutes = require('./routes/tags.routes');
 const app = express();
-const port = 3001;
+const port = 3005;
 
 // Middleware to parse JSON bodies
 app.use(express.json());

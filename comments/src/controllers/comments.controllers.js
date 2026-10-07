@@ -57,7 +57,7 @@ const updateComment = asyncHandler(async (req,res)=>{
     res.status(200).json(Comment);
 });
 
-exports.getAllComments = asyncHandler(async (req,res)=>{
+const getAllComments = asyncHandler(async (req,res)=>{
     const postId = req.params.id;
     const Comments = await prisma.comment.findMany({
         where: {
@@ -67,7 +67,7 @@ exports.getAllComments = asyncHandler(async (req,res)=>{
     res.status(200).json(Comments);
 })  
 
-exports.deleteCommentByAdmin = asyncHandler(async (req,res)=>{
+const deleteCommentByAdmin = asyncHandler(async (req,res)=>{
     const {id} = req.params;
     const Comment = await prisma.comment.delete({
         where: {
@@ -77,10 +77,22 @@ exports.deleteCommentByAdmin = asyncHandler(async (req,res)=>{
     res.status(200).json(Comment);
 })  
 
+
+const getCommentsByPostId = asyncHandler(async (req,res)=>{
+    const postId = req.params.id;
+    const Comments = await prisma.comment.findMany({
+        where: {
+            postId: parseInt(postId)    
+        }
+    });
+    res.status(200).json(Comments);
+})
+
 module.exports = {
     createComment,
     deleteComment,
     updateComment,
     getAllComments, 
-    deleteCommentByAdmin
+    deleteCommentByAdmin,
+    getCommentsByPostId
 }

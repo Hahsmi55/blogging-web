@@ -11,7 +11,7 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "@prisma/client": "^7.2.0",
+    "@prisma/client": "^6.19.2",
     "amqplib": "^0.10.9",
     "axios": "^1.13.5",
     "bcrypt": "^6.0.0",

@@ -1,9 +1,6 @@
 const error = require('../utils/errorApi');
 const asyncHandler = require('../utils/asyncHandler');
-const transporter = require('../config/nodemailer');  
-const oidClient = require('../config/openid');
-const redisClient = require('../config/redisClient');
-const stateGenerator = require('../utils/stateGen');
+const transporter = require('../config/nodemailer');
 const otp = require('../utils/otp');
 const authFuncs = require('../utils/authFuncs');
 const prisma = require('../config/prismaClient');
@@ -226,69 +223,13 @@ exports.refreshToken = asyncHandler(async (req, res, next) => {
     return res.status(200).json({ accessToken: newAccessToken, refreshToken: newRefreshToken });
 });
 
-exports.loginWithGoogle = asyncHandler(async (req, res, next) => {
-    const { client, generators} = await oidClient;
-    const state = stateGenerator(16);
-    const codeVerifier = generators.codeVerifier(); 
-    const codeChallenge = generators.codeChallenge(codeVerifier);
-    await redisClient.set(state, codeVerifier);  
-    const authorizationUrl = client.authorizationUrl({
-        scope: 'openid email profile',
-        code_challenge: codeChallenge,
-        code_challenge_method: 'S256',
-        state: state,
-    });
-    return res.status(200).json({ authorizationUrl });
-});
-
-exports.googleCallback = asyncHandler(async (req, res, next) => {
-    const { client } = await oidClient;
-    const params = client.callbackParams(req);
-    const codeVerifier = await redisClient.get(params.state);
-    if (!codeVerifier) {
-        return next(new error('Invalid state parameter', 400));
-    }
-    const tokenSet = await client.callback(process.env.REDIRECT_URI, params, { code_verifier: codeVerifier });
-    const userInfo = await client.userinfo(tokenSet.access_token);
-    let user = await prisma.user.findUnique({
-        where: {    
-            email: userInfo.email
-        }
-    });
-    if (!user) {
-        user = await prisma.user.create({
-            data: {
-                first_name: userInfo.given_name,
-                last_name: userInfo.family_name,
-                email: userInfo.email
-            }
-        });
-    }
-    const accessToken = authFuncs.generateAccessToken(user);
-    const refreshToken = authFuncs.generateRefreshToken(user);      
-    await prisma.refreshToken.create({
-        data: {
-            hash: refreshToken,
-            expireAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-        }
-    });
-    req.headers['authorization'] = `Bearer ${accessToken}`;
-    res.cookie('refreshToken', refreshToken, {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'strict',
-        maxAge: 7 * 24 * 60 * 60 * 1000
-    });
-    return res.status(200).json({ message: 'User logged in with Google successfully' });
-});  
-
 exports.getAllUsers = asyncHandler(async (req, res, next) => {   
     const users = await prisma.user.findMany();
     return res.status(200).json(users);
 });
 
 exports.deleteUser = asyncHandler(async (req, res, next) => {
-    const userId = req.params.id;
+    const userId = parseInt(req.params.id);
     await prisma.user.delete({
         where: {
             id: userId
@@ -296,26 +237,3 @@ exports.deleteUser = asyncHandler(async (req, res, next) => {
     });
     return res.status(200).json({ message: 'User deleted successfully' });
 });
-
-exports.createAdmin = asyncHandler(async (req, res, next) => {
-    const { fname, lname, email, password } = req.body;
-    const existingUser = await prisma.user.findUnique({
-        where: {
-            email: email
-        }
-    });    
-    if (existingUser) {
-        return next(new error('User already exists', 400));
-    }
-    const hashedPassword = await authFuncs.hashPassword(password);
-    const newAdmin = await prisma.user.create({
-        data: {
-            first_name: fname,
-            last_name: lname,
-            email: email,
-            password: hashedPassword,
-            role: 'ADMIN'
-        }
-    });
-    return res.status(200).json(newAdmin);  
-}); 

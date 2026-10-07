@@ -1,4 +1,4 @@
-const prisma = require('../prisma/prismaClient');
+const prisma = require('../config/prismaClient');
 const authFuncs = require('./authFuncs');
 
 exports.registerAdmin = async () => {
@@ -24,7 +24,3 @@ exports.registerAdmin = async () => {
     });
     return newAdmin;
 };
-
-module.exports = {
-    registerAdmin
-};  

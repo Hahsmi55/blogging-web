@@ -1,0 +1,358 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: blog-tags-posts
+meta:
+  id: wrk_4c00c9fee31f469bb9f8553cd1cd69b9
+  created: 1791213561165
+  modified: 1791213561165
+  description: ""
+collection:
+  - url: localhost:3003/tags/create
+    name: New Request
+    meta:
+      id: req_5745ed6446034aa7afb4ace3838b727f
+      created: 1791213577744
+      modified: 1791233636636
+      isPrivate: false
+      description: ""
+      sortKey: -1791213577744
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name" : "Geography"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.1.0
+        description: ""
+        disabled: false
+      - name: Authorization
+        value: Bearer Token
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: localhost:3003/tags/all
+    name: New Request
+    meta:
+      id: req_c83335b3890749b3b49566e7c5037536
+      created: 1791217291542
+      modified: 1791217326715
+      isPrivate: false
+      description: ""
+      sortKey: -1791217291542
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.1.0
+        description: ""
+        disabled: false
+      - name: Authorization
+        value: Bearer Token
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: localhost:3003/tags/3
+    name: New Request
+    meta:
+      id: req_12e1bfed76264bd7b8570a8962149e3c
+      created: 1791217366597
+      modified: 1791217417668
+      isPrivate: false
+      description: ""
+      sortKey: -1791217366597
+    method: DELETE
+    headers:
+      - name: User-Agent
+        value: insomnia/12.1.0
+        description: ""
+        disabled: false
+      - name: Authorization
+        value: Bearer Token
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: localhost:3003/posts/presigned-url
+    name: New Request
+    meta:
+      id: req_9df8cbb2352940f6a87d9b0a0957c66b
+      created: 1791225778933
+      modified: 1791226124038
+      isPrivate: false
+      description: ""
+      sortKey: -1791225778933
+    method: GET
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"key" : "something.jpg"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.1.0
+        description: ""
+        disabled: false
+      - name: Authorization
+        value: Bearer Token
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: https://blog-s3-media-bucket.s3.eu-north-1.amazonaws.com/something.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA5VNPGT5F3SZUSLPP%2F20261005%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Date=20261005T184851Z&X-Amz-Expires=3600&X-Amz-Signature=f26b07036a84c9319155d34cbc0fb6029d4d80dffaa23b00efdad3328bc1277d&X-Amz-SignedHeaders=host&x-amz-checksum-crc32=AAAAAA%3D%3D&x-amz-sdk-checksum-algorithm=CRC32&x-id=PutObject
+    name: New Request
+    meta:
+      id: req_0b320211e6134774bae572dc72787fd0
+      created: 1791226374207
+      modified: 1791226560445
+      isPrivate: false
+      description: ""
+      sortKey: -1791226374207
+    method: PUT
+    body:
+      mimeType: application/octet-stream
+      fileName: /home/abdullah/Videos/cat.jpeg
+    headers:
+      - name: Content-Type
+        value: image/jpeg
+      - name: User-Agent
+        value: insomnia/12.1.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: localhost:3003/posts/create
+    name: New Request
+    meta:
+      id: req_e99bb367f28249e6a363dccdfc3f41ba
+      created: 1791233666339
+      modified: 1791280371776
+      isPrivate: false
+      description: ""
+      sortKey: -1791233666339
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"title" : "History",
+        	"content" : "This is a demo post about history",
+        	"key" : "history.jpeg",
+        	"tagsIds" : [1]
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.1.0
+        description: ""
+        disabled: false
+      - name: Authorization
+        value: Bearer Token
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: localhost:3003/posts/4
+    name: New Request
+    meta:
+      id: req_41a30247b3e1423699f87ef5124f4adb
+      created: 1791278480359
+      modified: 1791279282615
+      isPrivate: false
+      description: ""
+      sortKey: -1791278480359
+    method: DELETE
+    headers:
+      - name: User-Agent
+        value: insomnia/12.1.0
+        description: ""
+        disabled: false
+      - name: Authorization
+        value: Bearer Token
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: localhost:3003/posts/author?page=1&limit=3
+    name: New Request
+    meta:
+      id: req_6c95d05135fb4c3b8e85c879d871d631
+      created: 1791279372255
+      modified: 1791279493327
+      isPrivate: false
+      description: ""
+      sortKey: -1791279372255
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.1.0
+        description: ""
+        disabled: false
+      - name: Authorization
+        value: Bearer Token
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: localhost:3003/posts/7
+    name: New Request
+    meta:
+      id: req_6a852d5d9bfe4bc585edd921f7c4c156
+      created: 1791279809485
+      modified: 1791280557346
+      isPrivate: false
+      description: ""
+      sortKey: -1791279809485
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"tagsIds" : [1]
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.1.0
+        description: ""
+        disabled: false
+      - name: Authorization
+        value: Bearer Token
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: localhost:3003/posts/delete/7
+    name: New Request
+    meta:
+      id: req_9e70379c0ba344b0b8449c761d9d8419
+      created: 1791280701576
+      modified: 1791280874160
+      isPrivate: false
+      description: ""
+      sortKey: -1791280701576
+    method: DELETE
+    headers:
+      - name: User-Agent
+        value: insomnia/12.1.0
+        description: ""
+        disabled: false
+      - name: Authorization
+        value: Bearer Token
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: ""
+    name: New Request
+    meta:
+      id: req_750bbb6b32b1427398e32a750e7aad6c
+      created: 1791316940451
+      modified: 1791316940451
+      isPrivate: false
+      description: ""
+      sortKey: -1791316940451
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.1.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_74e84bfe0fabc9c068a8eab27a21219d612a7513
+    created: 1791213561218
+    modified: 1791213561218
+  cookies:
+    - id: 4591b025-baaa-4e55-b74c-2f726b4311e7
+      key: accessToken Token
+      domain: localhost
+      path: /
+      secure: false
+      httpOnly: false
+environments:
+  name: Base Environment
+  meta:
+    id: env_74e84bfe0fabc9c068a8eab27a21219d612a7513
+    created: 1791213561205
+    modified: 1791213561205
+    isPrivate: false

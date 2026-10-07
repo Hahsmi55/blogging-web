@@ -12,10 +12,9 @@ model Posts {
   authorId  Int
   subject   String
   content   String
-  location  String
   key       String
   createdAt DateTime    @default(now())
-  updatedAt DateTime
+  updatedAt DateTime?   @updatedAt
   postsTags PostsTags[]
 }
 
@@ -23,16 +22,16 @@ model Tags {
   id        Int         @id @default(autoincrement())
   name      String
   createdAt DateTime    @default(now())
-  updatedAt DateTime
+  updatedAt DateTime    @updatedAt
   postsTags PostsTags[]
 }
 
 model PostsTags {
   id        Int      @id @default(autoincrement())
-  post      Posts    @relation(fields: [postId], references: [id])
+  post      Posts    @relation(fields: [postId], references: [id], onDelete : Cascade)
   postId    Int
-  tags      Tags     @relation(fields: [tagsId], references: [id])
+  tags      Tags     @relation(fields: [tagsId], references: [id], onDelete : Cascade)
   tagsId    Int
   createdAt DateTime @default(now())
-  updatedAt DateTime
+  updatedAt DateTime @updatedAt
 }

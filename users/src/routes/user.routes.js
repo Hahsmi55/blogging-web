@@ -13,13 +13,10 @@ router.post('/refresh-token', userController.refreshToken);
 router.post('/verify-otp', userController.verifyOtp);
 router.post('/send-otp', userController.sendOtp);
 router.post('/forgot-password', userController.forgotPassword);
-router.get('/profile', isLoggedIn, userController.getUserProfile); 
-router.post('/login-google', userController.loginWithGoogle);   
-router.post('/callback-google', userController.googleCallback);
+router.get('/profile', isLoggedIn, userController.getUserProfile);
 
 // admin routes
 router.get('/all', isLoggedIn, adminMiddleware, userController.getAllUsers);
 router.delete('/delete/:id', isLoggedIn, adminMiddleware, userController.deleteUser);
-router.post('/create-admin', isLoggedIn, adminMiddleware, userController.createAdmin);
 
 module.exports = router;

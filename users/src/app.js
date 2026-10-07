@@ -6,7 +6,6 @@ const cookieParser = require('cookie-parser');
 const userRoutes = require('./routes/user.routes');
 const { registerAdmin} = require('./utils/registeringAdmin')
 const app = express();
-const port = 3005;
 
 // Registering first admin
 
@@ -27,8 +26,8 @@ app.use(helmet());
 app.use('/auth', userRoutes);
 
 // Start the server
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+app.listen(process.env.PORT, () => {
+  console.log(`Server is running at http://localhost:${process.env.PORT}`);
 });
 
 module.exports = app;
