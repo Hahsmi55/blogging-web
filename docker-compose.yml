@@ -1,0 +1,148 @@
+services:
+
+  # =========================
+  # PostgreSQL
+  # =========================
+  postgres:
+    image: postgres:16-alpine
+    container_name: postgres
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+    ports:
+      - "5432:5432"
+
+    networks:
+      - app-network
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d yourdb"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+
+  # =========================
+  # User Service
+  # =========================
+  userservice:
+    build:
+      context: ./users
+      dockerfile: Dockerfile
+
+    container_name: userservice
+    restart: unless-stopped
+
+    env_file:
+      - ./users/.env.example
+
+    environment:
+      DATABASE_URL: "postgresql://postgres:postgres_password@postgres:5432/yourdb"
+
+    ports:
+      - "3000:3000"
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+    networks:
+      - app-network
+
+  # =========================
+  # Posts Service
+  # =========================
+  postsservice:
+    build:
+      context: ./posts
+      dockerfile: Dockerfile
+
+    container_name: postsservice
+    restart: unless-stopped
+
+    env_file:
+      - ./posts/.env.example
+
+    environment:
+      DATABASE_URL: "postgresql://postgres:postgres_password@postgres:5432/yourdb"
+
+    ports:
+      - "3001:3000"
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+    networks:
+      - app-network
+
+  # =========================
+  # Comments Service
+  # =========================
+  commentsservice:
+    build:
+      context: ./comments
+      dockerfile: Dockerfile
+
+    container_name: commentsservice
+    restart: unless-stopped
+
+    env_file:
+      - ./comments/.env.example
+
+    environment:
+      DATABASE_URL: "postgresql://postgres:postgres_password@postgres:5432/comments"
+
+    ports:
+      - "3002:3000"
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+    networks:
+      - app-network
+  # =========================
+  # Admin Service
+  # =========================
+  adminservice:
+    build:
+      context: ./admin
+      dockerfile: Dockerfile
+
+    container_name: adminservice
+    restart: unless-stopped
+
+    ports:
+      - "3003:3000"
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+    networks:
+      - app-network
+
+
+# =========================
+# Volumes
+# =========================
+volumes:
+  postgres_data:
+    driver: local
+
+
+# =========================
+# Network
+# =========================
+networks:
+  app-network:
+    driver: bridge
