@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3003;
+const port = 3002;
 const commentsRoutes = require('./routes/comments.routes');
 
 // Middleware to parse JSON bodies

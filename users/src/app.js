@@ -5,6 +5,7 @@ const helmet = require('helmet');
 const cookieParser = require('cookie-parser');  
 const userRoutes = require('./routes/user.routes');
 const { registerAdmin} = require('./utils/registeringAdmin')
+const PORT = 3000;
 const app = express();
 
 // Registering first admin
@@ -26,8 +27,8 @@ app.use(helmet());
 app.use('/auth', userRoutes);
 
 // Start the server
-app.listen(process.env.PORT, () => {
-  console.log(`Server is running at http://localhost:${process.env.PORT}`);
+app.listen(PORT, () => {
+  console.log(`Server is running at http://localhost:${PORT}`);
 });
 
 module.exports = app;
